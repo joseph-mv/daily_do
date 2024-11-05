@@ -1,12 +1,17 @@
 
 
 import './App.css'
-import { Header } from './components/Header'
+import { Sidebar } from './components'
+import Hero from './components/Hero'
+
+
 
 function App() {
   return (
     <>
-   <Header/>
+   <Sidebar/>
+   <Hero/>
+   
     </>
   )
 }

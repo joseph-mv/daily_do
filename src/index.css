@@ -6,18 +6,23 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  /* color-scheme: light dark; */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
 }
 
 *{
-  outline: 1px solid skyblue;
+  /* outline: 1px solid skyblue; */
+  scrollbar-width: none; 
+}
+body {
+  @apply bg-lightYellow text-black ; /* Default styles for light mode */
+}
+body.dark {
+  @apply bg-gray-900 text-white; /* Styles for dark mode */
 }
 
