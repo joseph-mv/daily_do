@@ -1,6 +1,6 @@
 import {  FC, useState } from "react";
-import { RootState, useAppDispatch } from "../../redux/store";
-import { useSelector } from "react-redux";
+// import { RootState, useAppDispatch } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../../redux/reducers/todoReducer";
 type TaskPopupProps={
   setIsTaskPopup:React.Dispatch<React.SetStateAction<boolean>>
@@ -14,8 +14,8 @@ type TaskForm={
 }
 
 const TaskPopup:FC<TaskPopupProps> = ({setIsTaskPopup}) => {
-  const projects=useSelector((state:RootState)=>state.todo.projects)
-const dispatch=useAppDispatch()
+  const projects=useSelector((state)=>state.todo.projects)
+const dispatch=useDispatch()
 
 
   const [taskForm, setTaskForm] = useState<TaskForm>({

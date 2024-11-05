@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link } from "./Link";
 
 import { Popup } from "../../components";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+// import { RootState, useAppDispatch } from "../../redux/store";
 import { deleteProjects } from "../../redux/reducers/todoReducer";
 import {  addProjectToIdb } from "../../idb/projectService";
 
 
 const Project: React.FC = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const projects = useSelector((state: RootState) => state.todo.projects);
+  const projects = useSelector((state) => state.todo.projects);
  
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   console.log('project')
   const handlePopup = () => {
     setShowPopup(!showPopup);
@@ -37,7 +37,7 @@ const Project: React.FC = () => {
       </div>
 
       <ul className="overflow-y-scroll  h-[calc(100vh-500px)] block">
-        {projects.map((project, index) => (
+        {projects?.map((project, index) => (
           <Link key={index} className="flex justify-between border-b-2 border-coral" href="#home">
             {index + 1} . {project}{" "}
             <button
