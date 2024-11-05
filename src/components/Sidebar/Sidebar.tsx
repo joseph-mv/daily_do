@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle/ThemeToggle";
 import { Link } from "./Link";
@@ -7,8 +6,9 @@ import TaskPopup from "./TaskPopup";
 
 const Sidebar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-  const [isTaskPopup,setIsTaskPopup]=useState<boolean>(false)
-console.log('sidebar')
+  const [isTaskPopup, setIsTaskPopup] = useState<boolean>(false);
+
+  console.log("sidebar");
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -30,8 +30,7 @@ console.log('sidebar')
 
   return (
     <>
-
-     <button
+      <button
         className={
           isSidebarOpen
             ? " absolute z-10 top-2 left-52"
@@ -46,10 +45,6 @@ console.log('sidebar')
         />
       </button>
 
-    
-    
-    
-
       <aside
         className={` relative  transition-all duration-300 ease-in-out ${
           isSidebarOpen
@@ -62,14 +57,16 @@ console.log('sidebar')
           <h1 className="text-2xl font-semibold">Daily-Do</h1>
         </div>
         <div className="relative">
-          <button onClick={()=>setIsTaskPopup(true)} className="w-full group   bg-brightRed text-white py-2 rounded mb-4 ">
+          <button
+            onClick={() => setIsTaskPopup(true)}
+            className="w-full group   bg-brightRed text-white py-2 rounded mb-4 "
+          >
             <span className="hidden transition-all group-hover:inline group-active:inline">
-            <i className="fas fa-plus mr-2 "></i>
+              <i className="fas fa-plus mr-2 "></i>
             </span>
-             Add Task
+            Add Task
           </button>
-   {  isTaskPopup &&     <TaskPopup setIsTaskPopup={setIsTaskPopup}/>}
-         
+          {isTaskPopup && <TaskPopup setIsTaskPopup={setIsTaskPopup} />}
 
           <nav>
             <ul>

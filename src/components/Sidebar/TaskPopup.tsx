@@ -3,6 +3,7 @@ import {  FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../../redux/reducers/todoReducer";
 import { RootState } from "../../redux/store";
+import { addTodoToDb } from "../../idb/todoService";
 
 type TaskPopupProps={
   setIsTaskPopup:React.Dispatch<React.SetStateAction<boolean>>
@@ -17,6 +18,7 @@ type TaskForm={
 
 const TaskPopup:FC<TaskPopupProps> = ({setIsTaskPopup}) => {
   const projects=useSelector((state:RootState)=>state.projects)
+  const todo=useSelector((state:RootState)=>state.todo)
 const dispatch=useDispatch()
 
 
@@ -28,6 +30,7 @@ const dispatch=useDispatch()
    description:''
   });
 
+
   const handleChange=(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>)=>{
       const {value,name}=e.target
       setTaskForm(prev=>({...prev,[name]:value}))
@@ -37,10 +40,14 @@ const dispatch=useDispatch()
   const handleSubmit = (e:React.FormEvent) => {
     e.preventDefault();
     dispatch(addTodo(taskForm))
-    
-    // onSave({ task, dueDate, dueTime, project, description });
-    // onClose();
+    const {dueDate,...rest}=taskForm
+
+    addTodoToDb({date:dueDate,todo:[...todo[dueDate] || [],rest]})
+
+    setIsTaskPopup(false)
   };
+ 
+  
 
   return (
     <div className="fixed w-screen z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -95,7 +102,7 @@ const dispatch=useDispatch()
               >
                 <option value="">select</option>
                 {
-                  projects.map(project=><option value={project}>{project}</option>)
+                  projects?.map((project ,index)=><option key={index} value={project}>{project}</option>)
                 }
                
               </select>
@@ -107,7 +114,7 @@ const dispatch=useDispatch()
             <textarea name='description' value={taskForm.description} onChange={handleChange} className=" px-3 py-2 border rounded w-full" rows={2} id="" placeholder="Enter description"></textarea>
           </div>
 
-          <button className="text-lg font-semibold bg-brightRed rounded-lg w-full mt-3 p-2">Submit</button>
+          <button  className="text-lg font-semibold bg-brightRed rounded-lg w-full mt-3 p-2">Submit</button>
         </form>
       </div>
      </div>

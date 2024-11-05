@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProjects } from "../../redux/reducers/todoReducer";
-import { getProjectsFromIdb } from "../../idb/projectService";
+// import { getProjectsFromIdb } from "../../idb/projectService";
 
 type PopupProps = {
   showPopup: boolean;
@@ -13,7 +13,7 @@ const Popup: React.FC<PopupProps> = ({ showPopup, setShowPopup }) => {
   const dispatch = useDispatch();
 
 
-  getProjectsFromIdb().then(data=>console.log(data))
+  // getProjectsFromIdb().then(data=>console.log(data))
 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
