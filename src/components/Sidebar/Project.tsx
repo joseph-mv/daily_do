@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "./Link";
 
 import { Popup } from "../../components";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { deleteProjects } from "../../redux/reducers/todoReducer";
+import {  addProjectToIdb } from "../../idb/projectService";
+
 
 const Project: React.FC = () => {
   const [showPopup, setShowPopup] = useState(false);
   const projects = useSelector((state: RootState) => state.todo.projects);
+ 
   const dispatch = useAppDispatch();
+  console.log('project')
   const handlePopup = () => {
     setShowPopup(!showPopup);
   };
+  useEffect(() => {
+    addProjectToIdb({id:'projects',projects:projects}) // update project in idb
+  }, [projects])
+  
 
   return (
     <div className="p-3">
@@ -44,6 +52,7 @@ const Project: React.FC = () => {
         ))}
       </ul>
       <Popup setShowPopup={setShowPopup} showPopup={showPopup} />
+      
     </div>
   );
 };

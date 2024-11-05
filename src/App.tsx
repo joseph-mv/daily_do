@@ -2,17 +2,17 @@
 
 import './App.css'
 import { Sidebar } from './components'
-import Hero from './components/Hero'
+
+
 
 
 
 function App() {
   return (
-    <>
+    <div className='flex'>
    <Sidebar/>
-   <Hero/>
    
-    </>
+    </div>
   )
 }
 

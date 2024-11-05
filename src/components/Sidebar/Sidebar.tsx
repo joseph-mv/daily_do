@@ -8,7 +8,7 @@ import TaskPopup from "./TaskPopup";
 const Sidebar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isTaskPopup,setIsTaskPopup]=useState<boolean>(false)
-
+console.log('sidebar')
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };

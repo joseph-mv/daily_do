@@ -14,7 +14,7 @@ const ThemeToggle: React.FC = () => {
 
 
   useEffect(() => {
-    console.log('second', isDarkMode ? 'dark' : 'light');
+    
     // Apply the theme className to the body
     if (isDarkMode) {
       document.body.classList.add('dark');
@@ -25,7 +25,7 @@ const ThemeToggle: React.FC = () => {
     }
   }, [isDarkMode]);
 
-  console.log('render', isDarkMode ? 'dark' : 'light');
+ 
 
   const toggleTheme = () => {
     setIsDarkMode(prevMode => !prevMode);

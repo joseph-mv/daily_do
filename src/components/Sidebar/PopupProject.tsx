@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProjects } from "../../redux/reducers/todoReducer";
+import { getProjectsFromIdb } from "../../idb/projectService";
 
 type PopupProps = {
   showPopup: boolean;
@@ -10,17 +11,26 @@ type PopupProps = {
 const Popup: React.FC<PopupProps> = ({ showPopup, setShowPopup }) => {
   const [projectName, setProjectName] = useState<string>("");
   const dispatch = useDispatch();
- 
+
+
+  getProjectsFromIdb().then(data=>console.log(data))
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
     setProjectName(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent  ) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(addProjects(projectName));
-    setShowPopup(false)
-    setProjectName('')
+    setShowPopup(false);
+    setProjectName("");
+  };
+  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
   };
 
   return (
@@ -43,6 +53,8 @@ const Popup: React.FC<PopupProps> = ({ showPopup, setShowPopup }) => {
               placeholder="Project Name"
               className="w-full p-2 border bg-gray-200  rounded mb-4"
               required
+              autoFocus
+              onKeyDown={handleEnter}
             />
             <div className="flex justify-end">
               <button
@@ -51,9 +63,7 @@ const Popup: React.FC<PopupProps> = ({ showPopup, setShowPopup }) => {
               >
                 Cancel
               </button>
-              <button
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:scale-105"
-              >
+              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:scale-105">
                 Add
               </button>
             </div>
