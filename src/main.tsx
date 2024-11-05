@@ -1,30 +1,25 @@
-// import { StrictMode } from "react";
-// import { createRoot } from "react-dom/client";
-// import "./index.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-// import { store } from "./redux/store.ts";
-// import App from "./App.tsx";
-// import { Provider } from "react-redux";
 
-// createRoot(document.getElementById("root")!).render(
-//   <StrictMode>
-//     <Provider store={store}>
-//       <App />
-//     </Provider>
-//   </StrictMode>
-// );
+import "./index.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 import  { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import { store } from './redux/store';
+import { createRoot } from "react-dom/client";
+import { EnhancedStore, StoreEnhancer, ThunkDispatch, Tuple, UnknownAction } from "@reduxjs/toolkit";
+import { InitialState } from "./redux/reducers/type";
 
+type StoreInstance= EnhancedStore<InitialState, UnknownAction, Tuple<[StoreEnhancer<{
+  dispatch: ThunkDispatch<InitialState, undefined, UnknownAction>;
+}>, StoreEnhancer]>>
 const Root = () => {
-  const [reduxStore, setReduxStore] = useState(null);
+  const [reduxStore, setReduxStore] = useState<StoreInstance|null>(null);
 
   useEffect(() => {
     const initialize = async () => {
       const storeInstance = await store;
+     
       setReduxStore(storeInstance);
     };
 
@@ -42,4 +37,7 @@ const Root = () => {
   );
 };
 
-ReactDOM.render(<Root />, document.getElementById('root'));
+
+createRoot(document.getElementById("root")!).render(
+  <Root/>
+);

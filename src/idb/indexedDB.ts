@@ -23,6 +23,7 @@ const dbPromise = openDB<MyDB>("dailyDo-database", 1, {
 
 export const loadInitialState = async (): Promise<InitialState> => {
   const projects = await getProjectsFromIdb() ?? ['']
+ 
   // const todo = await db.get('todo', 'default') as Record<string, Todo> || {};
   const todo = {
     a: [{ task: "str", time: "str", project: "str", description: "str" }],

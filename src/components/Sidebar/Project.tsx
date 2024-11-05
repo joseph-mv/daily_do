@@ -6,11 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 // import { RootState, useAppDispatch } from "../../redux/store";
 import { deleteProjects } from "../../redux/reducers/todoReducer";
 import {  addProjectToIdb } from "../../idb/projectService";
+import { InitialState } from "../../redux/reducers/type";
 
 
 const Project: React.FC = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const projects = useSelector((state) => state.todo.projects);
+  const projects = useSelector((state:InitialState) => state.projects);
  
   const dispatch = useDispatch();
   console.log('project')
