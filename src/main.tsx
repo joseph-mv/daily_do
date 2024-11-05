@@ -13,7 +13,7 @@ import { InitialState } from "./redux/reducers/type";
 type StoreInstance= EnhancedStore<InitialState, UnknownAction, Tuple<[StoreEnhancer<{
   dispatch: ThunkDispatch<InitialState, undefined, UnknownAction>;
 }>, StoreEnhancer]>>
-const Root = () => {
+export const Root = () => {
   const [reduxStore, setReduxStore] = useState<StoreInstance|null>(null);
 
   useEffect(() => {

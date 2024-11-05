@@ -14,7 +14,7 @@ const Project: React.FC = () => {
   const projects = useSelector((state:InitialState) => state.projects);
  
   const dispatch = useDispatch();
-  console.log('project')
+ 
   const handlePopup = () => {
     setShowPopup(!showPopup);
   };
