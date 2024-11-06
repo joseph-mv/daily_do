@@ -5,26 +5,28 @@ import Project from "./Project";
 import TaskPopup from "./TaskPopup";
 
 const Sidebar: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(()=>window.innerWidth>640);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(
+    () => window.innerWidth > 640
+  );
   const [isTaskPopup, setIsTaskPopup] = useState<boolean>(false);
 
-  console.log("sidebar");
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   useEffect(() => {
     const handleResize = () => {
-      console.log('handleResize')
+      console.log("handleResize");
       if (window.innerWidth < 640) {
         setIsSidebarOpen(false);
       } else {
         setIsSidebarOpen(true);
       }
     };
-    if(!isMobileDevice()){ // prevent resize while open  keyboard in mobile screen 
+    if (!isMobileDevice()) {
+      // prevent resize while open  keyboard in mobile screen
 
-      window.addEventListener("resize", handleResize);  
+      window.addEventListener("resize", handleResize);
     }
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -32,10 +34,9 @@ const Sidebar: React.FC = () => {
   }, []);
 
   function isMobileDevice() {
-    console.log(navigator.userAgent)
+    console.log(navigator.userAgent);
     return /Mobi|Android/i.test(navigator.userAgent);
   }
-  
 
   return (
     <>
@@ -58,7 +59,7 @@ const Sidebar: React.FC = () => {
         className={` relative  transition-all duration-300 ease-in-out ${
           isSidebarOpen
             ? "translate-x-0 opacity-100"
-            : "-translate-x-full opacity-0"
+            : "-translate-x-full opacity-0 hidden"
         } bg-softOrange text-black w-64 h-screen p-4`}
       >
         <div className="flex items-center mb-8">
