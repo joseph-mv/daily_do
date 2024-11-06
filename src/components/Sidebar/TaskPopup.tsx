@@ -50,7 +50,7 @@ const dispatch=useDispatch()
   
 
   return (
-    <div className="fixed w-screen z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="fixed w-screen  z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="relative bg-coral p-6 z-50 rounded-lg shadow-lg w-full text-black max-w-md">
         <button onClick={()=>{setIsTaskPopup(false)}} className="absolute right-3 top-4 font-bold text-2xl z-10  bg-lightYellow  text-center rounded-full size-10  transition-all hover:scale-110">  <i className=" fas fa-multiply "></i></button>
         <h2 className="text-2xl font-bold mb-4">Add Task</h2>

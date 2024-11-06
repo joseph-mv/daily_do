@@ -18,6 +18,7 @@
 *{
   /* outline: 1px solid skyblue; */
   scrollbar-width: none; 
+  
 }
 body {
   @apply bg-lightYellow text-black ; /* Default styles for light mode */

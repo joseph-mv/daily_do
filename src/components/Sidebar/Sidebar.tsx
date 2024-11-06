@@ -5,7 +5,7 @@ import Project from "./Project";
 import TaskPopup from "./TaskPopup";
 
 const Sidebar: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(()=>window.innerWidth>640);
   const [isTaskPopup, setIsTaskPopup] = useState<boolean>(false);
 
   console.log("sidebar");
@@ -15,18 +15,27 @@ const Sidebar: React.FC = () => {
 
   useEffect(() => {
     const handleResize = () => {
+      console.log('handleResize')
       if (window.innerWidth < 640) {
         setIsSidebarOpen(false);
       } else {
         setIsSidebarOpen(true);
       }
     };
-    window.addEventListener("resize", handleResize);
-    handleResize();
+    if(!isMobileDevice()){ // prevent resize while open  keyboard in mobile screen 
+
+      window.addEventListener("resize", handleResize);  
+    }
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  function isMobileDevice() {
+    console.log(navigator.userAgent)
+    return /Mobi|Android/i.test(navigator.userAgent);
+  }
+  
 
   return (
     <>
@@ -50,7 +59,7 @@ const Sidebar: React.FC = () => {
           isSidebarOpen
             ? "translate-x-0 opacity-100"
             : "-translate-x-full opacity-0"
-        } bg-softOrange text-black w-64 h-svh p-4`}
+        } bg-softOrange text-black w-64 h-screen p-4`}
       >
         <div className="flex items-center mb-8">
           <img src="vite.svg" alt="Logo" className="w-12 h-12 mr-2" />
