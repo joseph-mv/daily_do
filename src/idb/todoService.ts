@@ -3,9 +3,9 @@ import dbPromise from "./indexedDB";
 
 export type Todo = { date: string , todo:TaskItem[]};
 
-export const addTodoToDb = async (todoArr: Todo) => {
+export const addTodoToDb = async (todo: Todo) => {
   const db = await dbPromise;
-  await db.put("todo", todoArr);
+  await db.put("todo", todo);
 };
 
 export const getAllTodo=async()=>{
@@ -13,6 +13,6 @@ export const getAllTodo=async()=>{
     const todo=await db.getAll('todo')
     // console.log(todo)
     const todoObj=todo.reduce((acc,item)=>({...acc,[item.date]:item.todo}),{})
-    console.log(todoObj)
+    // console.log(todoObj)
     return todoObj
 }

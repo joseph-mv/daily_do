@@ -1,9 +1,12 @@
-import React from 'react'
+
+import Header from "./Header";
 
 const Main = () => {
   return (
-    <main className='bg-black h-screen flex-1'>Main</main>
-  )
-}
+    <main className="relative h-screen grow w-[50%] ">
+      <Header />
+    </main>
+  );
+};
 
-export default Main
+export default Main;

@@ -13,20 +13,19 @@ interface MyDB extends DBSchema {
       projects: string[];
     };
   };
-  todo:{
-    key:string;
-    value:{
-      date:string
-      todo:TaskItem[]
-    }
-  }
+  todo: {
+    key: string;
+    value: {
+      date: string;
+      todo: TaskItem[];
+    };
+  };
 }
-
 
 const dbPromise = openDB<MyDB>("dailyDo-database", 1, {
   upgrade(db) {
     // Create the 'project' object store
-     db.createObjectStore("project", {
+    db.createObjectStore("project", {
       keyPath: "id",
     });
 
@@ -38,8 +37,8 @@ const dbPromise = openDB<MyDB>("dailyDo-database", 1, {
 });
 
 export const loadInitialState = async (): Promise<InitialState> => {
-  const projects = await getProjectsFromIdb() ?? ['']
- const todo=await getAllTodo() || {}
+  const projects = (await getProjectsFromIdb()) ?? [""];
+  const todo = (await getAllTodo()) || {};
 
   return {
     projects,
