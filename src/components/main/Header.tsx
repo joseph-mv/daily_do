@@ -11,7 +11,6 @@ const Header: React.FC = () => {
     .join("-");
 
   const [date, setDate] = useState<Date>(new Date());
-  // const date = new Date();
   const Day = new Date();
   console.log(date);
   useEffect(() => {
@@ -28,8 +27,7 @@ const Header: React.FC = () => {
     setDaysArr([...days]);
   }, [date]);
 
-  // Number of items to show at once
-  // console.log(daysArr)
+ 
   const handleLeftClick = () => {
     Day.setDate(date.getDate() + startIndex - 6);
     daysArr.pop();
@@ -50,13 +48,9 @@ const Header: React.FC = () => {
 
   const getDisplayText = (day: string) => {
     if (today === day) return "today";
-    // if (index === 4) return "yesterday";
-    // if (index === 5) return "today";
-    // if (index === 6) return "tomorrow";
   };
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target.value)
     setDate(new Date(e.target.value));
   };
 
@@ -75,7 +69,6 @@ const Header: React.FC = () => {
 
       <ul className="flex w-[80%]  overflow-hidden mx-auto items-center justify-center gap-[4vw]">
         {daysArr.map((day) => {
-          // const actualIndex = startIndex + i;
           return (
             <li key={day} className="text-nowrap hover:scale-105">
               {getDisplayText(day) || day}
