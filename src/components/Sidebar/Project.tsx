@@ -24,12 +24,12 @@ const Project: React.FC = () => {
   
 
   return (
-    <div className="p-3">
-      <div className="flex items-center   justify-between mb-4 border-b-2 p-1 border-black">
-        <h3 className="text-xl font-semibold ">Projects</h3>
+    <div className=" p-3">
+      <div className="flex  items-center   justify-between mb-4 border-b-2 p-1 border-black">
+        <h3 className="text-xl  font-semibold ">Projects</h3>
         <button
           onClick={handlePopup}
-          className={`font-bold text-2xl z-20  bg-coral  text-center rounded-full size-10  transition-all hover:scale-110 ${
+          className={`relative font-bold text-2xl z-50  bg-coral  text-center rounded-full size-10  transition-all hover:scale-110 ${
             showPopup ? "rotate-45" : ""
           }`}
         >

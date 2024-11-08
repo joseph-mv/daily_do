@@ -58,7 +58,7 @@ const Header: React.FC = () => {
     <header className="overflow-hidden m-0 p-2 mt-12 border-y-2 border-coral">
       <input
         onChange={handleDate}
-        className="absolute top-3 right-3 size-5 scale-150 rounded-full bg-red-400"
+        className="cursor-pointer hover:-rotate-12 absolute top-3 right-3 size-5 scale-150 rounded-full bg-red-400"
         type="date"
       />
 
@@ -70,7 +70,7 @@ const Header: React.FC = () => {
       <ul className="flex w-[80%]  overflow-hidden mx-auto items-center justify-center gap-[4vw]">
         {daysArr.map((day) => {
           return (
-            <li key={day} className="text-nowrap hover:scale-105">
+            <li key={day} className="cursor-pointer text-nowrap hover:scale-105">
               {getDisplayText(day) || day}
             </li>
           );

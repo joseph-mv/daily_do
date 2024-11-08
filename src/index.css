@@ -28,3 +28,7 @@ body.dark {
   @apply bg-gray-900 text-white overflow-hidden max-w-[100vw]; /* Styles for dark mode */
 }
 
+.dark\:underline:where([data-mode="dark"], [data-mode="dark"] *){
+  text-decoration-line: underline
+}
+

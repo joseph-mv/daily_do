@@ -36,8 +36,8 @@ const Popup: React.FC<PopupProps> = ({ showPopup, setShowPopup }) => {
   return (
     showPopup && (
       <div
-        onMouseLeave={() => setShowPopup(false)}
-        className=" absolute top-0  z-10 pt-[60px]"
+        // onMouseLeave={() => setShowPopup(false)}
+        className=" absolute top-0  z-40 pt-[60px]"
       >
         <div className="   bg-coral   p-6 rounded-xl shadow-lg w-80">
           <h2 className="text-lg font-semibold mb-4 text-center text-gray-900">
