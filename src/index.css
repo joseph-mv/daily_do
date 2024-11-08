@@ -21,9 +21,14 @@
   
 }
 body {
-  @apply bg-lightYellow text-black ; /* Default styles for light mode */
+  @apply bg-lightYellow text-black overflow-hidden max-w-[100vw] ; 
+ /* Default styles for light mode */
 }
 body.dark {
-  @apply bg-gray-900 text-white; /* Styles for dark mode */
+  @apply bg-gray-900 text-white overflow-hidden max-w-[100vw]; /* Styles for dark mode */
+}
+
+.dark\:underline:where([data-mode="dark"], [data-mode="dark"] *){
+  text-decoration-line: underline
 }
 
