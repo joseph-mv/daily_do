@@ -52,7 +52,8 @@ const TaskPopup: FC<TaskPopupProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (date && index) {
+    
+    if (date && index!==undefined   ) {
       dispatch(deleteTodo({ dueDate: date, index: index }));
       deleteTodoInDb(date, index);
     }
@@ -72,7 +73,7 @@ const TaskPopup: FC<TaskPopupProps> = ({
         >
           <i className="fas fa-times"></i>
         </button>
-        <h2 className="text-2xl font-bold mb-4">Add Task</h2>
+        <h2 className="text-2xl font-bold mb-4">{date?"Edit Task":"Add Task"}</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="task" className="block text-gray-700">

@@ -62,7 +62,7 @@ const Sidebar: React.FC = () => {
 
       {/* Sidebar */}
       <aside
-        className={`relative z-10 shrink-0 transition-all duration-300 ease-in-out ${
+        className={`relative z-10 shrink-0 transition-all duration-300 ease-in-out h-svh ${
           isSidebarOpen
             ? "translate-x-0 opacity-100"
             : "-translate-x-full opacity-0 hidden"

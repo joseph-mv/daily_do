@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { InitialState } from "../../redux/reducers/type";
-import { dateToString } from "./utils";
+import { dateToDay, dateToString } from "./utils";
 import { checkTodo, deleteTodo } from "../../redux/reducers/todoReducer";
 import {  checkTodoInDb, deleteTodoInDb } from "../../idb/todoService";
 import { useState } from "react";
@@ -41,14 +41,19 @@ const handleChecked=(index:number)=>{
 
   return (
     <div  className=" relative bg-coral p-3 mx-3    rounded-xl h-[83%]">
-      {date.toISOString()}
+ <div className="flex flex-col absolute right-2 font-semibold">
+ <span className="">{dateToString(date)} </span>
+ <span> {dateToDay(date)}</span>
+  </div>   
 
       
       <h1 className=" text-center mb-3 font-semibold  text-2xl">Todo_List</h1>
+      <h2 className="text-center font-semibold">Review and update your tasks for the day.</h2>
       <ul className="m-4 grid p-2 overflow-auto max-h-[90%]  grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]  gap-4 ">
         {todoList?.map((todo,index) => {
           return (
-            <div key={index} className="flex w-[360px] min-h-28 overflow-hidden  m-auto items-center justify-between pl-4 bg-white shadow-md rounded-lg mb-4 ">
+            <div key={index} className="relative flex w-[360px] min-h-28 overflow-hidden  m-auto items-center justify-between pl-4 bg-white shadow-md rounded-lg mb-4 ">
+                <span className="absolute top-1 left-1  bg-coral size-5 rounded-full text-center font-semibold">{index+1}</span>
               <div className=" flex m-2   items-center">
                 <input
                   type="checkbox"

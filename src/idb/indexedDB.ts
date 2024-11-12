@@ -37,7 +37,7 @@ const dbPromise = openDB<MyDB>("dailyDo-database", 1, {
 });
 
 export const loadInitialState = async (): Promise<InitialState> => {
-  const projects = (await getProjectsFromIdb()) ?? [""];
+  const projects = (await getProjectsFromIdb()) ?? ["Home"];
   const todo = (await getAllTodo()) || {};
 
   return {

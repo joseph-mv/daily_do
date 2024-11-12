@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { dateToString } from "./utils";
-type HederProps={
-  setDate:React.Dispatch<React.SetStateAction<Date>>,
-  date:Date
-}
+type HederProps = {
+  setDate: React.Dispatch<React.SetStateAction<Date>>;
+  date: Date;
+};
 
-const Header: React.FC<HederProps> = ({setDate,date}) => {
+const Header: React.FC<HederProps> = ({ setDate, date }) => {
   const [startIndex, setStartIndex] = useState(0);
   const [daysArr, setDaysArr] = useState<string[]>([]);
-  const today =dateToString( new Date())
-   
+  const today = dateToString(new Date());
+
   const Day = new Date(date);
   useEffect(() => {
-    
     const days: string[] = [];
     function get11Days() {
       for (let i = -5; i < 6; i++) {
-        const Day = new Date(date); // avoid conflict with -ve values and 
+        const Day = new Date(date); // avoid conflict with -ve values and
         Day.setDate(date.getDate() + i);
-        days.push(
-         dateToString(Day)
-        ); // Format as DD-MM-YYYY
+        days.push(dateToString(Day)); // Format as DD-MM-YYYY
       }
     }
     get11Days();
@@ -28,24 +25,19 @@ const Header: React.FC<HederProps> = ({setDate,date}) => {
     setDaysArr([...days]);
   }, [date]);
 
-
   const handleLeftClick = () => {
     // console.log(Day)
     Day.setDate(date.getDate() + startIndex - 6);
     // console.log(Day)
     daysArr.pop();
-    daysArr.unshift(
-      dateToString(Day)
-    );
+    daysArr.unshift(dateToString(Day));
     setStartIndex((prevIndex) => prevIndex - 1);
   };
 
   const handleRightClick = () => {
     Day.setDate(date.getDate() + startIndex + 6);
     daysArr.shift();
-    daysArr.push(
-      dateToString(Day)
-    );
+    daysArr.push(dateToString(Day));
     setStartIndex((prevIndex) => prevIndex + 1);
   };
 
@@ -54,19 +46,18 @@ const Header: React.FC<HederProps> = ({setDate,date}) => {
   };
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    
     setDate(new Date(e.target.value));
   };
-  const handleDateClick=(day:string)=>{
-    
-    setDate(new Date(day.split('-').reverse().join('-')))
-  }
+  const handleDateClick = (day: string) => {
+    setDate(new Date(day.split("-").reverse().join("-")));
+  };
 
   return (
-    <header className=" m-0 mx-auto p-2 mt-12 border-y-2 border-coral">
+    <header className=" m-0 mx-auto p-2 mt-12 border-y-2  border-coral">
+      <i className="absolute top-3 right-3 text-2xl hover:-rotate-12  fa-solid fa-calendar-days"></i>
       <input
         onChange={handleDate}
-        className="cursor-pointer hover:-rotate-12 absolute top-3 right-3 size-5 scale-150 rounded-full bg-red-400"
+        className="cursor-pointer opacity-0 absolute top-3 right-3 scale-150 rounded-full size-5 "
         type="date"
       />
 
@@ -78,9 +69,15 @@ const Header: React.FC<HederProps> = ({setDate,date}) => {
       <ul className="flex w-[80%]   mx-auto items-center justify-center gap-[2vw]">
         {daysArr.map((day) => {
           return (
-            <li  onClick={()=>handleDateClick(day)} key={day} className={`${dateToString(date)===day && 'relative bg-coral px-4 rounded-t-lg  after:absolute  after:top-[90%]  after:left-0 after:w-full after:h-full after:clip  after:bg-coral after:'} min-w-[120px] text-center cursor-pointer pt-2 text-nowrap hover:scale-105`}>
+            <li
+              onClick={() => handleDateClick(day)}
+              key={day}
+              className={`${
+                dateToString(date) === day &&
+                "relative bg-coral px-4 rounded-t-lg  after:absolute  after:top-[90%]  after:left-0 after:w-full after:h-full after:clip  after:bg-coral after:"
+              } min-w-[120px] text-center cursor-pointer pt-2 text-nowrap hover:scale-105`}
+            >
               {getDisplayText(day) || day}
-              
             </li>
           );
         })}
