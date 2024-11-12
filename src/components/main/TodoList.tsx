@@ -3,22 +3,26 @@ import { InitialState } from "../../redux/reducers/type";
 import { dateToString } from "./utils";
 import { checkTodo, deleteTodo } from "../../redux/reducers/todoReducer";
 import {  checkTodoInDb, deleteTodoInDb } from "../../idb/todoService";
+import { useState } from "react";
+import TaskPopup from "../Sidebar/TaskPopup";
 
 type TodoListProps ={
   date:Date
 }
 
 const TodoList: React.FC<TodoListProps> = ({date}) => {
+
 const dispatch=useDispatch()
+const [isEdit,setIsEdit]=useState<boolean>(false)
 const dueDate=dateToString(date)
   const todoList = useSelector(
     (store: InitialState) => store.todo[dueDate]
   );
- console.log(todoList)
- const todo = useSelector(
-  (store: InitialState) => store
-);
-console.log(todo)
+//  console.log(todoList)
+//  const todo = useSelector(
+//   (store: InitialState) => store
+// );
+// console.log(todo)
 
 
 
@@ -31,6 +35,9 @@ const handleChecked=(index:number)=>{
   dispatch(checkTodo({dueDate:dueDate,index:index}))
   checkTodoInDb(dueDate,index)
   }
+ const handleEdit=()=>{
+  setIsEdit(prev=>!prev)
+ }
 
   return (
     <div  className=" relative bg-coral p-3 mx-3    rounded-xl h-[83%]">
@@ -67,13 +74,14 @@ const handleChecked=(index:number)=>{
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col justify-center gap-5 w-20 shrink-0 h-28   bg-softOrange  space-x-2">
+              <div className="flex flex-col justify-center gap-5 w-20 shrink-0 h-28   bg-softOrange ">
                 <button
-                  //   onClick={onEdit}
+                  onClick={handleEdit}
                   className="text-blue-500 hover:text-blue-700 transition-colors"
                 >
                   <i className="fa-solid fa-pencil"></i>
                 </button>
+                {isEdit && <TaskPopup setIsTaskPopup={setIsEdit} date={dueDate} index={index} form={{...todo,dueDate:dueDate.split('-').reverse().join('-')}} />}
                 <button
                     onClick={()=>{handleDelete(index)}}
                   className="text-red-500 hover:text-red-700 transition-colors"

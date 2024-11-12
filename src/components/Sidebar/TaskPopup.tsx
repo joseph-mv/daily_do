@@ -1,11 +1,14 @@
 import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../../redux/reducers/todoReducer";
+import { addTodo, deleteTodo } from "../../redux/reducers/todoReducer";
 import { RootState } from "../../redux/store";
-import { addTodoToDb } from "../../idb/todoService";
+import { addTodoToDb, deleteTodoInDb } from "../../idb/todoService";
 
 type TaskPopupProps = {
   setIsTaskPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  form?: TaskForm;
+  date?: string;
+  index?: number;
 };
 
 type TaskForm = {
@@ -14,22 +17,29 @@ type TaskForm = {
   time: string;
   project: string;
   description: string;
-  checked:boolean
+  checked: boolean;
 };
 
-const TaskPopup: FC<TaskPopupProps> = ({ setIsTaskPopup }) => {
+const TaskPopup: FC<TaskPopupProps> = ({
+  setIsTaskPopup,
+  form,
+  date,
+  index,
+}) => {
   const projects = useSelector((state: RootState) => state.projects);
   const todo = useSelector((state: RootState) => state.todo);
   const dispatch = useDispatch();
 
-  const [taskForm, setTaskForm] = useState<TaskForm>({
-    task: "",
-    dueDate: "",
-    time: "",
-    project: "",
-    description: "",
-    checked:false
-  });
+  const [taskForm, setTaskForm] = useState<TaskForm>(
+    form || {
+      task: "",
+      dueDate: "",
+      time: "",
+      project: "",
+      description: "",
+      checked: false,
+    }
+  );
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -42,6 +52,10 @@ const TaskPopup: FC<TaskPopupProps> = ({ setIsTaskPopup }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (date && index) {
+      dispatch(deleteTodo({ dueDate: date, index: index }));
+      deleteTodoInDb(date, index);
+    }
     taskForm.dueDate = taskForm.dueDate.split("-").reverse().join("-");
     dispatch(addTodo(taskForm));
     const { dueDate, ...rest } = taskForm;
@@ -50,8 +64,7 @@ const TaskPopup: FC<TaskPopupProps> = ({ setIsTaskPopup }) => {
   };
 
   return (
-    <div className="fixed w-screen z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      
+    <div className="fixed left-0 w-screen z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="relative bg-coral p-6 z-10 rounded-lg shadow-lg w-full text-black max-w-md">
         <button
           onClick={() => setIsTaskPopup(false)}
