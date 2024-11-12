@@ -14,6 +14,7 @@ type TaskForm = {
   time: string;
   project: string;
   description: string;
+  checked:boolean
 };
 
 const TaskPopup: FC<TaskPopupProps> = ({ setIsTaskPopup }) => {
@@ -27,6 +28,7 @@ const TaskPopup: FC<TaskPopupProps> = ({ setIsTaskPopup }) => {
     time: "",
     project: "",
     description: "",
+    checked:false
   });
 
   const handleChange = (

@@ -4,6 +4,7 @@ export type TaskItem = {
     time: string;
     project: string;
     description: string;
+    checked:boolean
   };
   
 export  type Day = TaskItem[];

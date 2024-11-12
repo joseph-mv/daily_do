@@ -29,9 +29,13 @@ const todoSlice = createSlice({
     deleteTodo:(state,action:PayloadAction<{dueDate:string,index:number}>)=>{
      const {dueDate,index} =action.payload
       state.todo[dueDate].splice(index,1)
-    }
+    },
+    checkTodo:(state,action:PayloadAction<{dueDate:string,index:number}>)=>{
+      const {dueDate,index} =action.payload
+       state.todo[dueDate][index].checked=!state.todo[dueDate][index].checked
+     },
   },
 });
 
-export const { addProjects, deleteProjects, addTodo,deleteTodo } = todoSlice.actions;
+export const { addProjects, deleteProjects, addTodo,deleteTodo,checkTodo } = todoSlice.actions;
 export default todoSlice.reducer;

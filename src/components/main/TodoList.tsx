@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { InitialState } from "../../redux/reducers/type";
 import { dateToString } from "./utils";
-import { deleteTodo } from "../../redux/reducers/todoReducer";
-import {  deleteTodoInDb } from "../../idb/todoService";
+import { checkTodo, deleteTodo } from "../../redux/reducers/todoReducer";
+import {  checkTodoInDb, deleteTodoInDb } from "../../idb/todoService";
 
 type TodoListProps ={
   date:Date
@@ -27,6 +27,11 @@ dispatch(deleteTodo({dueDate:dueDate,index:index}))
 deleteTodoInDb(dueDate,index)
 }
 
+const handleChecked=(index:number)=>{
+  dispatch(checkTodo({dueDate:dueDate,index:index}))
+  checkTodoInDb(dueDate,index)
+  }
+
   return (
     <div  className=" relative bg-coral p-3 mx-3    rounded-xl h-[83%]">
       {date.toISOString()}
@@ -40,8 +45,8 @@ deleteTodoInDb(dueDate,index)
               <div className=" flex m-2   items-center">
                 <input
                   type="checkbox"
-                  //   checked={completed}
-                  //   onChange={(e) => onToggle(e.target.checked)}
+                    checked={todo.checked}
+                    onChange={() => handleChecked(index)}
                   className="mr-4 shrink-0 form-checkbox h-5 w-5 text-blue-600"
                 />
                 <div className="overflow-hidden w-52 ">  

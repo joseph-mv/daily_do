@@ -16,9 +16,17 @@ export const getAllTodo=async()=>{
     // console.log(todoObj)
     return todoObj
 }
+
 export const deleteTodoInDb=async(date:string,index:number)=>{
 const db=await dbPromise
 const todo=await db.get("todo",date) as Todo
 todo?.todo.splice(index,1)
 await db.put("todo",todo)
 }
+
+export const checkTodoInDb=async(date:string,index:number)=>{
+  const db=await dbPromise
+  const todo=await db.get("todo",date) as Todo
+  todo.todo[index].checked =!todo.todo[index].checked 
+  await db.put("todo",todo)
+  }
