@@ -10,15 +10,13 @@ const Header: React.FC<HederProps> = ({setDate,date}) => {
   const [daysArr, setDaysArr] = useState<string[]>([]);
   const today =dateToString( new Date())
    
-
- 
-  const Day = new Date();
-
+  const Day = new Date(date);
   useEffect(() => {
     
     const days: string[] = [];
     function get11Days() {
       for (let i = -5; i < 6; i++) {
+        const Day = new Date(date); // avoid conflict with -ve values and 
         Day.setDate(date.getDate() + i);
         days.push(
          dateToString(Day)
@@ -26,13 +24,15 @@ const Header: React.FC<HederProps> = ({setDate,date}) => {
       }
     }
     get11Days();
-    console.log(days)
+    // console.log(days)
     setDaysArr([...days]);
   }, [date]);
 
 
   const handleLeftClick = () => {
+    // console.log(Day)
     Day.setDate(date.getDate() + startIndex - 6);
+    // console.log(Day)
     daysArr.pop();
     daysArr.unshift(
       dateToString(Day)
@@ -50,18 +50,20 @@ const Header: React.FC<HederProps> = ({setDate,date}) => {
   };
 
   const getDisplayText = (day: string) => {
-    if (today === day) return "today";
+    if (today === day) return "Today";
   };
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    
     setDate(new Date(e.target.value));
   };
   const handleDateClick=(day:string)=>{
+    
     setDate(new Date(day.split('-').reverse().join('-')))
   }
 
   return (
-    <header className="overflow-hidden m-0 p-2 mt-12 border-y-2 border-coral">
+    <header className=" m-0 mx-auto p-2 mt-12 border-y-2 border-coral">
       <input
         onChange={handleDate}
         className="cursor-pointer hover:-rotate-12 absolute top-3 right-3 size-5 scale-150 rounded-full bg-red-400"
@@ -69,14 +71,14 @@ const Header: React.FC<HederProps> = ({setDate,date}) => {
       />
 
       <i
-        className="absolute left-2 top-14 text-3xl  fa-solid fa-circle-chevron-left cursor-pointer hover:-translate-x-1"
+        className="absolute left-2 top-14 text-3xl z-10 fa-solid fa-circle-chevron-left cursor-pointer hover:-translate-x-1"
         onClick={handleLeftClick}
       ></i>
 
-      <ul className="flex w-[80%]  overflow-x-hidden mx-auto items-center justify-center gap-[4vw]">
+      <ul className="flex w-[80%]   mx-auto items-center justify-center gap-[2vw]">
         {daysArr.map((day) => {
           return (
-            <li  onClick={()=>handleDateClick(day)} key={day} className={`${dateToString(date)===day && 'relative bg-coral p-2 rounded-t-lg  after:absolute  after:top-[100%]  after:left-0 after:w-full after:h-full   after:bg-black after:z-20'} cursor-pointer text-nowrap hover:scale-105`}>
+            <li  onClick={()=>handleDateClick(day)} key={day} className={`${dateToString(date)===day && 'relative bg-coral px-4 rounded-t-lg  after:absolute  after:top-[90%]  after:left-0 after:w-full after:h-full after:clip  after:bg-coral after:'} min-w-[120px] text-center cursor-pointer pt-2 text-nowrap hover:scale-105`}>
               {getDisplayText(day) || day}
               
             </li>

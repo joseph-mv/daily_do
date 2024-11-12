@@ -11,10 +11,10 @@ const TodoList: React.FC<TodoListProps> = ({date}) => {
   const todoList = useSelector(
     (store: InitialState) => store.todo[dateToString(date)]
   );
- console.log(todoList)
+//  console.log(todoList)
 
   return (
-    <div className=" relative bg-coral p-3 m-3   rounded h-[80%]">
+    <div className=" relative bg-coral p-3 mx-3    rounded-xl h-[83%]">
       {date.toISOString()}
 
       

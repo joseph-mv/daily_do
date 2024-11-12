@@ -12,7 +12,8 @@ export default {
         softOrange: '#FBD288', // Soft Orange
         coral: '#FF9C73', // Coral
         brightRed: '#FF4545',
-      }
+      },
+     
     },
   },
   plugins: [],
