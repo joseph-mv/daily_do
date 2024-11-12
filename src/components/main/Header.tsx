@@ -1,38 +1,41 @@
 import React, { useEffect, useState } from "react";
+import { dateToString } from "./utils";
+type HederProps={
+  setDate:React.Dispatch<React.SetStateAction<Date>>,
+  date:Date
+}
 
-const Header: React.FC = () => {
+const Header: React.FC<HederProps> = ({setDate,date}) => {
   const [startIndex, setStartIndex] = useState(0);
   const [daysArr, setDaysArr] = useState<string[]>([]);
-  const today = new Date()
-    .toISOString()
-    .split("T")[0]
-    .split("-")
-    .reverse()
-    .join("-");
+  const today =dateToString( new Date())
+   
 
-  const [date, setDate] = useState<Date>(new Date());
+ 
   const Day = new Date();
-  console.log(date);
+
   useEffect(() => {
+    
     const days: string[] = [];
     function get11Days() {
       for (let i = -5; i < 6; i++) {
         Day.setDate(date.getDate() + i);
         days.push(
-          Day.toISOString().split("T")[0].split("-").reverse().join("-")
+         dateToString(Day)
         ); // Format as DD-MM-YYYY
       }
     }
     get11Days();
+    console.log(days)
     setDaysArr([...days]);
   }, [date]);
 
- 
+
   const handleLeftClick = () => {
     Day.setDate(date.getDate() + startIndex - 6);
     daysArr.pop();
     daysArr.unshift(
-      Day.toISOString().split("T")[0].split("-").reverse().join("-")
+      dateToString(Day)
     );
     setStartIndex((prevIndex) => prevIndex - 1);
   };
@@ -41,7 +44,7 @@ const Header: React.FC = () => {
     Day.setDate(date.getDate() + startIndex + 6);
     daysArr.shift();
     daysArr.push(
-      Day.toISOString().split("T")[0].split("-").reverse().join("-")
+      dateToString(Day)
     );
     setStartIndex((prevIndex) => prevIndex + 1);
   };
@@ -53,6 +56,9 @@ const Header: React.FC = () => {
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDate(new Date(e.target.value));
   };
+  const handleDateClick=(day:string)=>{
+    setDate(new Date(day.split('-').reverse().join('-')))
+  }
 
   return (
     <header className="overflow-hidden m-0 p-2 mt-12 border-y-2 border-coral">
@@ -67,11 +73,12 @@ const Header: React.FC = () => {
         onClick={handleLeftClick}
       ></i>
 
-      <ul className="flex w-[80%]  overflow-hidden mx-auto items-center justify-center gap-[4vw]">
+      <ul className="flex w-[80%]  overflow-x-hidden mx-auto items-center justify-center gap-[4vw]">
         {daysArr.map((day) => {
           return (
-            <li key={day} className="cursor-pointer text-nowrap hover:scale-105">
+            <li  onClick={()=>handleDateClick(day)} key={day} className={`${dateToString(date)===day && 'relative bg-coral p-2 rounded-t-lg  after:absolute  after:top-[100%]  after:left-0 after:w-full after:h-full   after:bg-black after:z-20'} cursor-pointer text-nowrap hover:scale-105`}>
               {getDisplayText(day) || day}
+              
             </li>
           );
         })}

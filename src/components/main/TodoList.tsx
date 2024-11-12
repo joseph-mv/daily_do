@@ -1,13 +1,23 @@
 import { useSelector } from "react-redux";
 import { InitialState } from "../../redux/reducers/type";
+import { dateToString } from "./utils";
 
-const TodoList: React.FC = () => {
+type TodoListProps ={
+  date:Date
+}
+
+const TodoList: React.FC<TodoListProps> = ({date}) => {
+
   const todoList = useSelector(
-    (store: InitialState) => store.todo["07-11-2024"]
+    (store: InitialState) => store.todo[dateToString(date)]
   );
+ console.log(todoList)
 
   return (
     <div className=" relative bg-coral p-3 m-3   rounded h-[80%]">
+      {date.toISOString()}
+
+      
       <h1 className=" text-center mb-3 font-semibold  text-2xl">Todo_List</h1>
       <ul className="m-4 grid p-2 overflow-auto max-h-[90%]  grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]  gap-4 ">
         {todoList?.map((todo) => {
