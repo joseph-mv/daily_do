@@ -6,6 +6,7 @@ const initialState: InitialState = {
   todo: {},
 };
 
+
 const todoSlice = createSlice({
   name: "todo",
   initialState,
@@ -25,8 +26,12 @@ const todoSlice = createSlice({
         state.todo[dueDate] = [rest];
       }
     },
+    deleteTodo:(state,action:PayloadAction<{dueDate:string,index:number}>)=>{
+     const {dueDate,index} =action.payload
+      state.todo[dueDate].splice(index,1)
+    }
   },
 });
 
-export const { addProjects, deleteProjects, addTodo } = todoSlice.actions;
+export const { addProjects, deleteProjects, addTodo,deleteTodo } = todoSlice.actions;
 export default todoSlice.reducer;
