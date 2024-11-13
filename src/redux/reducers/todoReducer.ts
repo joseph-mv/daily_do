@@ -20,7 +20,19 @@ const todoSlice = createSlice({
     addTodo: (state, action: PayloadAction<Task>) => {
       const { dueDate, ...rest } = action.payload;
       if (state.todo[dueDate]) {
-        state.todo[dueDate].push(rest);
+        let todoElement = rest;
+        for (let i = 0; i < state.todo[dueDate].length; i++) {
+          if (state?.todo[dueDate][i].time <= rest.time) {
+            continue;
+          } else {
+            [todoElement, state.todo[dueDate][i]] = [
+              state.todo[dueDate][i],
+              todoElement,
+            ];
+          }
+        }
+
+        state.todo[dueDate].push(todoElement);
       } else {
         state.todo[dueDate] = [rest];
       }
