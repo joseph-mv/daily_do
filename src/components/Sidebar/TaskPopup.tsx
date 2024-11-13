@@ -1,8 +1,8 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo, deleteTodo } from "../../redux/reducers/todoReducer";
 import { RootState } from "../../redux/store";
-import { addTodoToDb, deleteTodoInDb } from "../../idb/todoService";
+import { DateContext } from "../../contextAPI/context";
 
 type TaskPopupProps = {
   setIsTaskPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,8 +27,8 @@ const TaskPopup: FC<TaskPopupProps> = ({
   index,
 }) => {
   const projects = useSelector((state: RootState) => state.projects);
-  const todo = useSelector((state: RootState) => state.todo);
-  const dispatch = useDispatch();
+ const dispatch = useDispatch();
+ const {setDate}=useContext(DateContext)
 
   const [taskForm, setTaskForm] = useState<TaskForm>(
     form || {
@@ -55,13 +55,12 @@ const TaskPopup: FC<TaskPopupProps> = ({
     
     if (date && index!==undefined   ) {
       dispatch(deleteTodo({ dueDate: date, index: index }));
-      deleteTodoInDb(date, index);
-    }
+      }
+      
     taskForm.dueDate = taskForm.dueDate.split("-").reverse().join("-");
     dispatch(addTodo(taskForm));
-    const { dueDate, ...rest } = taskForm;
-    console.log({date: dueDate, todo: [...(todo[dueDate] || []), rest]})
-    addTodoToDb({ date: dueDate, todo: [...(todo[dueDate] || []), rest] });
+    // 
+    setDate(new Date(taskForm.dueDate.split("-").reverse().join("-")))
     setIsTaskPopup(false);
   };
 

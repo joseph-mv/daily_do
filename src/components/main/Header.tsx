@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { dateToString } from "./utils";
-type HederProps = {
-  setDate: React.Dispatch<React.SetStateAction<Date>>;
-  date: Date;
-};
+import { DateContext } from "../../contextAPI/context";
 
-const Header: React.FC<HederProps> = ({ setDate, date }) => {
+
+const Header: React.FC = () => {
+const  {date,setDate}=useContext(DateContext)
   const [startIndex, setStartIndex] = useState(0);
   const [daysArr, setDaysArr] = useState<string[]>([]);
   const today = dateToString(new Date());

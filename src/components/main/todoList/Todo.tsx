@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { checkTodo, deleteTodo } from "../../../redux/reducers/todoReducer";
-import { checkTodoInDb, deleteTodoInDb } from "../../../idb/todoService";
 import { useState } from "react";
 import TaskPopup from "../../Sidebar/TaskPopup";
 import { TaskItem } from "../../../redux/reducers/type";
@@ -17,12 +16,10 @@ const Todo: React.FC<TodoProps> = ({ index, todo, dueDate }) => {
 
   const handleDelete = (index: number) => {
     dispatch(deleteTodo({ dueDate: dueDate, index: index }));
-    deleteTodoInDb(dueDate, index);
   };
 
   const handleChecked = (index: number) => {
     dispatch(checkTodo({ dueDate: dueDate, index: index }));
-    checkTodoInDb(dueDate, index);
   };
   const handleEdit = () => {
     setIsEdit((prev) => !prev);

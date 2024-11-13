@@ -2,15 +2,17 @@ import { useSelector } from "react-redux";
 import { InitialState } from "../../../redux/reducers/type";
 import { dateToDay, dateToString } from "../utils";
 import Todo from "./Todo";
+import { useContext, useMemo } from "react";
+import { addTodoToDb } from "../../../idb/todoService";
+import { DateContext } from "../../../contextAPI/context";
 
-type TodoListProps = {
-  date: Date;
-};
 
-const TodoList: React.FC<TodoListProps> = ({ date }) => {
+const TodoList: React.FC = () => {
+  const  {date}=useContext(DateContext)
   const dueDate = dateToString(date);
   const todoList = useSelector((store: InitialState) => store.todo[dueDate]);
-
+console.log(todoList)
+useMemo(() =>addTodoToDb({date:dueDate,todo:todoList}), [todoList])
   return (
     <div className=" relative bg-coral p-3 mx-3    rounded-xl h-[83%]">
       <div className="flex flex-col absolute right-2 font-semibold">
