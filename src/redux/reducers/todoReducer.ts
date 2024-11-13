@@ -21,29 +21,30 @@ const todoSlice = createSlice({
       const { dueDate, ...rest } = action.payload;
       if (state.todo[dueDate]) {
         let todoElement = rest;
-        for (let i = 0; i < state.todo[dueDate].length; i++) {
-          if (state?.todo[dueDate][i].time <= rest.time) {
+        for (let i = 0; i < state.todo[dueDate].todoList.length; i++) {
+          if (state?.todo[dueDate].todoList[i].time <= rest.time) {
             continue;
           } else {
-            [todoElement, state.todo[dueDate][i]] = [
-              state.todo[dueDate][i],
+            [todoElement, state.todo[dueDate].todoList[i]] = [
+              state.todo[dueDate].todoList[i],
               todoElement,
             ];
           }
         }
-
-        state.todo[dueDate].push(todoElement);
+        ++state.todo[dueDate].count
+        state.todo[dueDate].todoList.push(todoElement);
       } else {
-        state.todo[dueDate] = [rest];
+        state.todo[dueDate] = {todoList:[rest],count:1,completed:0};
       }
     },
     deleteTodo:(state,action:PayloadAction<{dueDate:string,index:number}>)=>{
      const {dueDate,index} =action.payload
-      state.todo[dueDate].splice(index,1)
+      state.todo[dueDate].todoList.splice(index,1)
+      --state.todo[dueDate].count
     },
     checkTodo:(state,action:PayloadAction<{dueDate:string,index:number}>)=>{
       const {dueDate,index} =action.payload
-       state.todo[dueDate][index].checked=!state.todo[dueDate][index].checked
+       state.todo[dueDate].todoList[index].checked=!state.todo[dueDate].todoList[index].checked
      },
   },
 });

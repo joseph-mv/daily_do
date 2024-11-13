@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { InitialState } from "../../../redux/reducers/type";
 import { dateToDay, dateToString } from "../utils";
 import Todo from "./Todo";
-import { useContext, useMemo } from "react";
+import { useContext, useEffect} from "react";
 import { addTodoToDb } from "../../../idb/todoService";
 import { DateContext } from "../../../contextAPI/context";
 
@@ -12,7 +12,14 @@ const TodoList: React.FC = () => {
   const dueDate = dateToString(date);
   const todoList = useSelector((store: InitialState) => store.todo[dueDate]);
 console.log(todoList)
-useMemo(() =>addTodoToDb({date:dueDate,todo:todoList}), [todoList])
+
+
+useEffect(() => {
+  if (todoList) {
+    addTodoToDb({ date: dueDate, ...todoList });
+  }
+}, [todoList,dueDate]);
+
   return (
     <div className=" relative bg-coral p-3 mx-3    rounded-xl h-[83%]">
       <div className="flex flex-col absolute right-2 font-semibold">
@@ -25,7 +32,7 @@ useMemo(() =>addTodoToDb({date:dueDate,todo:todoList}), [todoList])
         Review and update your tasks for the day.
       </h2>
       <ul className="m-4 grid p-2 overflow-auto max-h-[90%]  grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]  gap-4 ">
-        {todoList?.map((todo, index) => {
+        {todoList?.todoList?.map((todo, index) => {
           return (
             <Todo key={index} dueDate={dueDate} index={index} todo={todo} />
           );

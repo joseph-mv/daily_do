@@ -1,5 +1,5 @@
 import { openDB, DBSchema } from "idb";
-import { InitialState, TaskItem } from "../redux/reducers/type";
+import { Day, InitialState } from "../redux/reducers/type";
 import { getProjectsFromIdb } from "./projectService";
 import { getAllTodo } from "./todoService";
 
@@ -15,10 +15,7 @@ interface MyDB extends DBSchema {
   };
   todo: {
     key: string;
-    value: {
-      date: string;
-      todo: TaskItem[];
-    };
+    value: Day& {date:string}
   };
 }
 

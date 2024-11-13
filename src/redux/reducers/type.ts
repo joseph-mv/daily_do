@@ -7,7 +7,7 @@ export type TaskItem = {
     checked:boolean
   };
   
-export  type Day = TaskItem[];
+export  type Day ={todoList: TaskItem[],count:number,completed:number};
   
 export  type Task = TaskItem & {
     dueDate: string;

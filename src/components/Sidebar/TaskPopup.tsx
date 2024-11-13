@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTodo, deleteTodo } from "../../redux/reducers/todoReducer";
 import { RootState } from "../../redux/store";
 import { DateContext } from "../../contextAPI/context";
+import { deleteTodoInDb } from "../../idb/todoService";
 
 type TaskPopupProps = {
   setIsTaskPopup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -55,6 +56,7 @@ const TaskPopup: FC<TaskPopupProps> = ({
     
     if (date && index!==undefined   ) {
       dispatch(deleteTodo({ dueDate: date, index: index }));
+      deleteTodoInDb(date,index)
       }
       
     taskForm.dueDate = taskForm.dueDate.split("-").reverse().join("-");
