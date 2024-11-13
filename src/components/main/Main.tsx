@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import Header from "./Header";
-import TodoList from "./TodoList";
+import TodoList from "./todoList/TodoList";
 
 const Main = () => {
   const [date, setDate] = useState<Date>(new Date());

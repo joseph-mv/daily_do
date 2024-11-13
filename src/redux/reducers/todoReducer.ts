@@ -19,7 +19,6 @@ const todoSlice = createSlice({
     },
     addTodo: (state, action: PayloadAction<Task>) => {
       const { dueDate, ...rest } = action.payload;
-       
       if (state.todo[dueDate]) {
         state.todo[dueDate].push(rest);
       } else {

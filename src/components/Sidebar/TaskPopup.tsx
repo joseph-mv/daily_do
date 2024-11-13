@@ -60,6 +60,7 @@ const TaskPopup: FC<TaskPopupProps> = ({
     taskForm.dueDate = taskForm.dueDate.split("-").reverse().join("-");
     dispatch(addTodo(taskForm));
     const { dueDate, ...rest } = taskForm;
+    console.log({date: dueDate, todo: [...(todo[dueDate] || []), rest]})
     addTodoToDb({ date: dueDate, todo: [...(todo[dueDate] || []), rest] });
     setIsTaskPopup(false);
   };
