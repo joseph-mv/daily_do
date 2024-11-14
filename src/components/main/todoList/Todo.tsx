@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { checkTodo, deleteTodo } from "../../../redux/reducers/todoReducer";
 import { useState } from "react";
-import TaskPopup from "../../Sidebar/TaskPopup";
+import TaskPopup from "../../TaskPopup";
 import { TaskItem } from "../../../redux/reducers/type";
 
 type TodoProps = {
@@ -30,8 +30,10 @@ const Todo: React.FC<TodoProps> = ({ index, todo, dueDate }) => {
       key={index}
       className="relative flex w-[360px] min-h-28 overflow-hidden  m-auto items-center justify-between pl-4 bg-white shadow-md rounded-lg mb-4 "
     >
-      <span className="absolute top-1 left-1  bg-coral size-5 rounded-full text-center font-semibold">
+      <span className="flex items-center justify-center absolute top-1 left-1 border-collapse bg-coral size-6 rounded-full  font-semibold outline outline-1 -outline-offset-4 ">
+      
         {index + 1}
+      
       </span>
       <div className=" flex m-2   items-center">
         <input

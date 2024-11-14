@@ -44,6 +44,13 @@ const todoSlice = createSlice({
     },
     checkTodo:(state,action:PayloadAction<{dueDate:string,index:number}>)=>{
       const {dueDate,index} =action.payload
+      console.log(state.todo[dueDate].todoList[index].checked)
+      if(state.todo[dueDate].todoList[index].checked){
+        --state.todo[dueDate].completed
+      }else{
+        
+        ++state.todo[dueDate].completed
+      }
        state.todo[dueDate].todoList[index].checked=!state.todo[dueDate].todoList[index].checked
      },
   },

@@ -1,15 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { dateToString } from "./utils";
 import { DateContext } from "../../contextAPI/context";
-
+import { useSelector } from "react-redux";
+import { InitialState } from "../../redux/reducers/type";
 
 const Header: React.FC = () => {
-const  {date,setDate}=useContext(DateContext)
+  const { date, setDate } = useContext(DateContext);
   const [startIndex, setStartIndex] = useState(0);
   const [daysArr, setDaysArr] = useState<string[]>([]);
   const today = dateToString(new Date());
-
+  const todoList = useSelector((store: InitialState) => store.todo);
+  const [animated,setIsAnimated]=useState(true)
   const Day = new Date(date);
+ 
   useEffect(() => {
     const days: string[] = [];
     function get11Days() {
@@ -20,14 +23,11 @@ const  {date,setDate}=useContext(DateContext)
       }
     }
     get11Days();
-    // console.log(days)
     setDaysArr([...days]);
   }, [date]);
 
   const handleLeftClick = () => {
-    // console.log(Day)
     Day.setDate(date.getDate() + startIndex - 6);
-    // console.log(Day)
     daysArr.pop();
     daysArr.unshift(dateToString(Day));
     setStartIndex((prevIndex) => prevIndex - 1);
@@ -51,6 +51,19 @@ const  {date,setDate}=useContext(DateContext)
     setDate(new Date(day.split("-").reverse().join("-")));
   };
 
+  
+  useEffect(() => {
+    setTimeout(() => {
+      setIsAnimated(false);
+  }, 1000);     
+      return () => {
+        setIsAnimated(true);
+        
+      } 
+  }, [todoList]);
+
+  
+
   return (
     <header className=" m-0 mx-auto p-2 mt-12 border-y-2  border-coral">
       <i className="absolute top-3 right-3 text-2xl hover:-rotate-12  fa-solid fa-calendar-days"></i>
@@ -67,17 +80,27 @@ const  {date,setDate}=useContext(DateContext)
 
       <ul className="flex w-[80%]   mx-auto items-center justify-center gap-[2vw]">
         {daysArr.map((day) => {
+        const formerDay=  today.split("-").reverse().join("") >=   
+          day.split("-").reverse().join("")
           return (
-            <li
-              onClick={() => handleDateClick(day)}
-              key={day}
-              className={`${
-                dateToString(date) === day &&
-                "relative bg-coral px-4 rounded-t-lg  after:absolute  after:top-[90%]  after:left-0 after:w-full after:h-full after:clip  after:bg-coral after:"
-              } min-w-[120px] text-center cursor-pointer pt-2 text-nowrap hover:scale-105`}
-            >
-              {getDisplayText(day) || day}
-            </li>
+            <>
+              <li
+                onClick={() => handleDateClick(day)}
+                key={day}
+                className={` relative outline-1 outline rounded-md min-w-[120px] text-center cursor-pointer pt-2 text-nowrap hover:scale-105 ${
+                  dateToString(date) === day &&
+                  "relative outline-none bg-coral px-4 rounded-t-lg  after:absolute  after:top-[90%]  after:left-0 after:w-full after:h-full  after:bg-coral"
+                }`}
+              >
+                {getDisplayText(day) || day}
+                <span className={`flex items-center justify-center  absolute -top-2 -right-2 bg-brightRed text-white text-xs size-6 rounded-full ${animated && dateToString(date) === day &&'animate-bounce'} `}>
+                  {formerDay && (
+                    <span>{todoList[day]?.completed || 0}/ </span>
+                  )}
+                  {todoList[day]?.count || 0}
+                </span>
+              </li>
+            </>
           );
         })}
       </ul>

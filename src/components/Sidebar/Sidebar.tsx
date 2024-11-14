@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle/ThemeToggle";
 import { Link } from "./Link";
 import Project from "./Project";
-import TaskPopup from "./TaskPopup";
+import TaskPopup from "../TaskPopup";
 
 const Sidebar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(
