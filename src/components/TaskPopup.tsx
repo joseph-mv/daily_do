@@ -10,6 +10,7 @@ type TaskPopupProps = {
   form?: TaskForm;
   date?: string;
   index?: number;
+  formerDay?:boolean
 };
 
 type TaskForm = {
@@ -26,6 +27,7 @@ const TaskPopup: FC<TaskPopupProps> = ({
   form,
   date,
   index,
+  formerDay
 }) => {
   const projects = useSelector((state: RootState) => state.projects);
  const dispatch = useDispatch();
@@ -105,6 +107,8 @@ const TaskPopup: FC<TaskPopupProps> = ({
                 onChange={handleChange}
                 className="bg-white w-36 px-3 py-2 border rounded"
                 required
+                disabled={formerDay}
+                min={new Date().toISOString().split('T')[0]}
               />
             </div>
             <div>

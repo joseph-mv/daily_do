@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle/ThemeToggle";
-import { Link } from "./Link";
+import { NavLink } from "./NavLink";
 import Project from "./Project";
 import TaskPopup from "../TaskPopup";
 
@@ -46,9 +46,7 @@ const Sidebar: React.FC = () => {
       {/* Toggle Button */}
 
       <button
-        className={`fixed z-20   top-2 ${
-          isSidebarOpen ? "left-52" : "left-2"
-        }`}
+        className={`fixed z-20   top-2 ${isSidebarOpen ? "left-52" : "left-2"}`}
         onClick={toggleSidebar}
       >
         <img
@@ -89,15 +87,15 @@ const Sidebar: React.FC = () => {
           {/* Navigation Links */}
           <nav>
             <ul>
-              <Link href="#user">
+              <NavLink href="/user">
                 <i className="fas fa-user mr-2"></i> User
-              </Link>
-              <Link href="#upcoming">
+              </NavLink>
+              <NavLink href="/upcoming">
                 <i className="fas fa-calendar-alt mr-2"></i> Upcoming
-              </Link>
-              <Link href="#completed">
+              </NavLink>
+              <NavLink href="/completed">
                 <i className="fas fa-check mr-2"></i> Completed
-              </Link>
+              </NavLink>
             </ul>
           </nav>
 

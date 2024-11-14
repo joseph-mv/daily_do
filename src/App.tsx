@@ -1,20 +1,19 @@
-import { useState } from "react";
-import "./App.css";
-import { Sidebar } from "./components";
-import Main from "./components/main/Main";
-import { DateContext } from "./contextAPI/context";
 
-function App() {
-  const [date, setDate] = useState<Date>(new Date());
- 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Upcoming from './pages/UpcomingPage';
+import Completed from './pages/CompletedPage';
+
+export const App = () => {
   return (
-    <div className=" flex ">
-      <DateContext.Provider value={{date,setDate}} >
-        <Sidebar />
-        <Main />
-      </DateContext.Provider>
-    </div>
-  );
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/upcoming" element={<Upcoming />} />
+          <Route path="/completed" element={<Completed />} />
+        </Routes>
+      </div>
+    </Router>
+  )
 }
-
-export default App;

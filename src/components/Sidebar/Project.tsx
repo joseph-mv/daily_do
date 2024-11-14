@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "./Link";
+import { NavLink } from "./NavLink";
 
 import { Popup } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +39,7 @@ const Project: React.FC = () => {
 
       <ul className="overflow-y-scroll  h-[calc(100vh-500px)] block">
         {projects?.map((project, index) => (
-          <Link key={index} className="flex justify-between border-b-2 border-coral" href="#home">
+          <NavLink key={index} className="flex justify-between border-b-2 border-coral" href="#home">
             {index + 1} . {project}{" "}
             <button
               onClick={() => {
@@ -49,7 +49,7 @@ const Project: React.FC = () => {
             >
               <i className="fa-solid fa-trash-can "></i>
             </button>
-          </Link>
+          </NavLink>
         ))}
       </ul>
       <Popup setShowPopup={setShowPopup} showPopup={showPopup} />

@@ -8,9 +8,11 @@ type TodoProps = {
   index: number;
   todo: TaskItem;
   dueDate: string;
+  formerDay:boolean
+  comingDay:boolean
 };
 
-const Todo: React.FC<TodoProps> = ({ index, todo, dueDate }) => {
+const Todo: React.FC<TodoProps> = ({ index, todo, dueDate ,formerDay,comingDay}) => {
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
@@ -41,6 +43,7 @@ const Todo: React.FC<TodoProps> = ({ index, todo, dueDate }) => {
           checked={todo.checked}
           onChange={() => handleChecked(index)}
           className="mr-4 shrink-0 form-checkbox h-5 w-5 text-blue-600"
+          disabled={comingDay}
         />
         <div className="overflow-hidden w-52 ">
           <h3 className="text-lg truncate text-black font-semibold">
@@ -79,7 +82,8 @@ const Todo: React.FC<TodoProps> = ({ index, todo, dueDate }) => {
             setIsTaskPopup={setIsEdit}
             date={dueDate}
             index={index}
-            form={{ ...todo, dueDate: dueDate.split("-").reverse().join("-") }}
+            form={{ ...todo,  dueDate: dueDate.split("-").reverse().join("-") }}
+            formerDay={formerDay}
           />
         )}
         <button

@@ -11,8 +11,9 @@ const TodoList: React.FC = () => {
   const  {date}=useContext(DateContext)
   const dueDate = dateToString(date);
   const todoList = useSelector((store: InitialState) => store.todo[dueDate]);
-console.log(todoList)
-
+  const today = new Date().toISOString().split('T')[0].split('-').join('')
+  const formerDay=dueDate.split('-').reverse().join('')<today
+  const comingDay=dueDate.split('-').reverse().join('')>today
 
 useEffect(() => {
   if (todoList) {
@@ -26,7 +27,6 @@ useEffect(() => {
         <span className="">{dateToString(date)} </span>
         <span> {dateToDay(date)}</span>
       </div>
-
       <h1 className=" text-center mb-3 font-semibold  text-2xl">Todo_List</h1>
       <h2 className="text-center font-semibold">
         Review and update your tasks for the day.
@@ -34,7 +34,7 @@ useEffect(() => {
       <ul className="m-4 grid p-2 overflow-auto max-h-[90%]  grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]  gap-4 ">
         {todoList?.todoList?.map((todo, index) => {
           return (
-            <Todo key={index} dueDate={dueDate} index={index} todo={todo} />
+            <Todo key={index}  dueDate={dueDate} index={index} todo={todo} formerDay={formerDay} comingDay={comingDay} />
           );
         })}
       </ul>
