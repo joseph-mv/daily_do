@@ -3,9 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Upcoming from './pages/UpcomingPage';
 import Completed from './pages/CompletedPage';
+import { DateContext } from './contextAPI/context';
+import { useState } from 'react';
 
 export const App = () => {
+  const [date, setDate] = useState<Date>(new Date());
+ 
   return (
+    <DateContext.Provider value={{date,setDate}} >
     <Router>
       <div>
         <Routes>
@@ -15,5 +20,6 @@ export const App = () => {
         </Routes>
       </div>
     </Router>
+    </DateContext.Provider>
   )
 }

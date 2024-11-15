@@ -1,6 +1,6 @@
 import { FC, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, deleteTodo } from "../redux/reducers/todoReducer";
+import { addTodo,  checkTodo,  deleteTodo } from "../redux/reducers/todoReducer";
 import { RootState } from "../redux/store";
 import { DateContext } from "../contextAPI/context";
 import { deleteTodoInDb } from "../idb/todoService";
@@ -53,17 +53,25 @@ const TaskPopup: FC<TaskPopupProps> = ({
     setTaskForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit =async(e: React.FormEvent) => {
     e.preventDefault();
     
     if (date && index!==undefined   ) {
+      if(taskForm.checked){
+        console.log('checked')
+        dispatch(checkTodo({dueDate:date,index:index}))
+        taskForm.checked=false
+      }
       dispatch(deleteTodo({ dueDate: date, index: index }));
-      deleteTodoInDb(date,index)
+     await deleteTodoInDb(date,index)
+      
       }
       
     taskForm.dueDate = taskForm.dueDate.split("-").reverse().join("-");
-    dispatch(addTodo(taskForm));
+     dispatch(addTodo(taskForm));
     // 
+   
+    
     setDate(new Date(taskForm.dueDate.split("-").reverse().join("-")))
     setIsTaskPopup(false);
   };

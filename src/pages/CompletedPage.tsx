@@ -3,7 +3,7 @@ import Completed from "../components/completed/Completed";
 
 function CompletedPage() {
   return (
-    <div className=" flex ">
+    <div className=" flex h-[100vh] ">
       <Sidebar />
       <Completed/>
     </div>

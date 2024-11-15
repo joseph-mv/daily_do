@@ -17,7 +17,7 @@ const Sidebar: React.FC = () => {
 
   // Function to detect if the user is on a mobile device
   const isMobileDevice = () => {
-    console.log(navigator.userAgent);
+    // console.log(navigator.userAgent);
     return /Mobi|Android/i.test(navigator.userAgent);
   };
 
@@ -68,7 +68,8 @@ const Sidebar: React.FC = () => {
       >
         {/* Logo and Title */}
         <div className="flex items-center mb-8">
-          <img src="vite.svg" alt="Logo" className=" w-12 h-12 mr-2" />
+          <img src="images/logo.jpg" alt="Logo" className="rounded-full w-12 h-12 mr-2" />
+          
           <h1 className=" text-2xl font-semibold">Daily-Do</h1>
         </div>
 
@@ -87,8 +88,8 @@ const Sidebar: React.FC = () => {
           {/* Navigation Links */}
           <nav>
             <ul>
-              <NavLink href="/user">
-                <i className="fas fa-user mr-2"></i> User
+              <NavLink href="/">
+                <i className="fas fa-home mr-2"></i> Home
               </NavLink>
               <NavLink href="/upcoming">
                 <i className="fas fa-calendar-alt mr-2"></i> Upcoming

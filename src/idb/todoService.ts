@@ -5,7 +5,7 @@ import dbPromise from "./indexedDB";
 export type Todo =Day & {date:string};
 
 export const addTodoToDb = async (todo: Todo) => {
-  console.log(todo)
+  console.log('add to db',todo)
   const db = await dbPromise;
   await db.put("todo", todo);
 };
@@ -20,9 +20,11 @@ export const getAllTodo=async()=>{
 }
 
 export const deleteTodoInDb=async(date:string,index:number)=>{
+  console.log('delete todo from idb')
 const db=await dbPromise
 const todo=await db.get("todo",date) as Todo
 todo?.todoList.splice(index,1)
+--todo.count
 await db.put("todo",todo)
 }
 

@@ -5,17 +5,16 @@ import Todo from "./Todo";
 import { useContext, useEffect} from "react";
 import { addTodoToDb } from "../../../idb/todoService";
 import { DateContext } from "../../../contextAPI/context";
+import { comingDay, formerDay } from "../../../utils";
 
 
 const TodoList: React.FC = () => {
   const  {date}=useContext(DateContext)
   const dueDate = dateToString(date);
   const todoList = useSelector((store: InitialState) => store.todo[dueDate]);
-  const today = new Date().toISOString().split('T')[0].split('-').join('')
-  const formerDay=dueDate.split('-').reverse().join('')<today
-  const comingDay=dueDate.split('-').reverse().join('')>today
-
+  console.log('todo list ',dueDate)
 useEffect(() => {
+  console.log('todo list useEffect')
   if (todoList) {
     addTodoToDb({ date: dueDate, ...todoList });
   }
@@ -34,7 +33,7 @@ useEffect(() => {
       <ul className="m-4 grid p-2 overflow-auto max-h-[90%]  grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]  gap-4 ">
         {todoList?.todoList?.map((todo, index) => {
           return (
-            <Todo key={index}  dueDate={dueDate} index={index} todo={todo} formerDay={formerDay} comingDay={comingDay} />
+            <Todo key={index}  dueDate={dueDate} index={index} todo={todo} formerDay={formerDay(dueDate)} comingDay={comingDay(dueDate)} />
           );
         })}
       </ul>

@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import { checkTodo, deleteTodo } from "../../../redux/reducers/todoReducer";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import TaskPopup from "../../TaskPopup";
 import { TaskItem } from "../../../redux/reducers/type";
+import { DateContext } from "../../../contextAPI/context";
 
 type TodoProps = {
   index: number;
@@ -14,14 +15,17 @@ type TodoProps = {
 
 const Todo: React.FC<TodoProps> = ({ index, todo, dueDate ,formerDay,comingDay}) => {
   const dispatch = useDispatch();
+  const {setDate}=useContext(DateContext)
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const handleDelete = (index: number) => {
     dispatch(deleteTodo({ dueDate: dueDate, index: index }));
+    setDate(new Date(dueDate.split("-").reverse().join("-")))
   };
 
   const handleChecked = (index: number) => {
     dispatch(checkTodo({ dueDate: dueDate, index: index }));
+    setDate(new Date(dueDate.split("-").reverse().join("-")))
   };
   const handleEdit = () => {
     setIsEdit((prev) => !prev);

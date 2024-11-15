@@ -12,12 +12,11 @@ const Header: React.FC = () => {
   const todoList = useSelector((store: InitialState) => store.todo);
   const [animated,setIsAnimated]=useState(true)
   const Day = new Date(date);
- 
   useEffect(() => {
     const days: string[] = [];
     function get11Days() {
       for (let i = -5; i < 6; i++) {
-        const Day = new Date(date); // avoid conflict with -ve values and
+         const Day = new Date(date); // avoid conflict with -ve values and
         Day.setDate(date.getDate() + i);
         days.push(dateToString(Day)); // Format as DD-MM-YYYY
       }
@@ -83,7 +82,7 @@ const Header: React.FC = () => {
         const formerDay=  today.split("-").reverse().join("") >=   
           day.split("-").reverse().join("")
           return (
-            <>
+            
               <li
                 onClick={() => handleDateClick(day)}
                 key={day}
@@ -100,7 +99,7 @@ const Header: React.FC = () => {
                   {todoList[day]?.count || 0}
                 </span>
               </li>
-            </>
+            
           );
         })}
       </ul>
