@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { InitialState } from "../../redux/reducers/type";
 import Todo from "../main/todoList/Todo";
 import { comingDay, formerDay } from "../../utils";
-import { useUpdateIDb } from "../../hooks/useUpdateIDB";
+import { useUpdateIDb } from "../../hooks/useUpdateIDb";
 import { useMemo } from "react";
 
 const Completed = () => {

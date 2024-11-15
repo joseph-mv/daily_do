@@ -23,8 +23,12 @@ export const deleteTodoInDb=async(date:string,index:number)=>{
   console.log('delete todo from idb')
 const db=await dbPromise
 const todo=await db.get("todo",date) as Todo
+if(todo.todoList[index].checked){
+  --todo.completed
+}
 todo?.todoList.splice(index,1)
 --todo.count
+
 await db.put("todo",todo)
 }
 
