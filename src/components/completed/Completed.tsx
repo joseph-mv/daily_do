@@ -13,7 +13,7 @@ const Completed = () => {
  
   useUpdateIDb()
   return (
-    <div className="relative overflow-auto bg-white   grow w-[50%]">
+    <div className="relative overflow-auto    grow w-[50%]">
       
       <h1 className="mt-6 text-4xl font-semibold text-center">Completed</h1>
       <ul className="">

@@ -13,12 +13,12 @@ const InCompleted = () => {
 
   useUpdateIDb()
   return (
-    <div className="relative overflow-auto bg-white   grow w-[50%]">
+    <div className="relative overflow-auto   grow w-[50%]">
       
       <h1 className="mt-6 text-4xl font-semibold text-center">Incomplete</h1>
       <ul className="">
         {dueDateArr.map((dueDate, i) => (
-          <div className="border-b-2" key={i}>
+          <div className="mt-3 border-b-2 border-brightRed" key={i}>
           <h2 className="ml-4">{dueDate}</h2>
             <ul className="m-4 grid p-2 overflow-auto max-h-[90%]   grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]  gap-4">
               {todos[dueDate].count!==todos[dueDate].completed ?
