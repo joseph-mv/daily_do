@@ -1,50 +1,83 @@
-# React + TypeScript + Vite
+# DailyDo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DailyDo is a sleek and efficient to-do list application designed to help you manage your tasks with ease. Built with React, DailyDo offers a seamless user experience, allowing you to add, edit, and delete tasks effortlessly. With separate tabs for each day, upcoming, completed, and incompleted tasks, DailyDo helps you stay organized and on top of your schedule.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Task Management**: Add, edit, and delete tasks.
+- **Tabs for Each Day**: Separate tabs for each day to organize your tasks.
+- **Upcoming Tasks**: View all upcoming tasks.
+- **Completed Tasks**: View all completed tasks.
+- **Incomplete Tasks**: View all incomplete tasks.
+- **Task Statistics**: Displays the number of completed tasks and total tasks per day.
+- **Responsive Design**: Works on all device sizes.
+- **Real-Time Updates**: Tasks update in real-time without needing to refresh.
+- **Offline Support**: Uses IndexedDB for offline storage and synchronization.
+- **User-Friendly Interface**: Intuitive and easy-to-use interface.
+- **Sorted Tasks**: Tasks are displayed in a sorted order.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend**: React.js, TypeScript, Vite, HTML, Tailwind CSS
+- **Storage**: IndexedDB
+- **Styling**: Tailwind CSS
+- **State Management**: React State
+- **Testing**: Vitest
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Prerequisites
+
+Ensure you have the following installed on your local machine:
+
+- Node.js
+- npm (Node Package Manager)
+
+### Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/joseph-mv/daily_do.git
+   cd dailydo
+    ```
+ 
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+    ```
+
+### Running the application
+
+1.**Start the development server :**
+
+ ```bash
+   npm run dev
+```
+### Running Tests
+
+1.**To run unit tests using Vitest: :**
+
+ ```bash
+   npm test
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+   ### Contributing:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Contributions are welcome! Please follow these guidelines:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. **Fork the repository.**
+2. **Create a new branch:** `git checkout -b feature/your-feature`
+3. **Make your changes.**
+4. **Commit your changes:** `git commit -m 'Add new feature'`
+5. **Push to your branch:** `git push origin feature/your-feature`
+6. **Create a pull request.**
+
+**License:**
+
+[MIT License]
+
+**Acknowledgements:**
+
+* Thanks to the React, TypeScript, Vite, IndexedDB, Tailwind CSS,Vitest communities for their excellent tools and resources..
