@@ -1,30 +1,38 @@
-// import { render, screen } from '@testing-library/react';
-// import App from '../src/App';
-// describe('<App/>',()=>{
-//     it('it shoud render',()=>{
-//        render(<App/>)
-//        screen.debug()
-//     })
-// })
-
-
-import { render, screen } from '@testing-library/react';
+// App.test.tsx
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import App from '../src/pages/Home';  // Adjust the import path as necessary
+import { describe, it, expect } from 'vitest';
+import { App } from '../src/App';
+import { DateContext } from '../src/contextAPI/context';
+
 
 const mockStore = configureStore([]);
-const store = mockStore({ /* your initial state */ });
 
 describe('<App />', () => {
-    it('should render the Sidebar component', () => {
-        render(
-          <Provider store={store}>
+  it('should render the Sidebar component', () => {
+    const initialState = {
+      todo: {
+        '18-11-2024': [] // Adjust to match your expected state structure
+      }
+    };
+    const store = mockStore(initialState);
+    const mockDateContextValue = { date: new Date('2024-11-18'), setDate: vitest.fn() };
+
+    const { getByText } = render(
+      <Provider store={store}>
+        <DateContext.Provider value={mockDateContextValue}>
+          
             <App />
-          </Provider>
-        );
-        // Assuming the Sidebar component has some text or element that can be queried
-        const sidebarElement = screen.getByText(/daily-do/i);
-        expect(sidebarElement).toBeInTheDocument();
-      });
+          
+        </DateContext.Provider>
+      </Provider>
+    );
+
+    // Add your assertions here, for example:
+    expect(getByText('Home')).toBeInTheDocument();
+    expect(getByText('Upcoming')).toBeInTheDocument();
+    expect(getByText('Completed')).toBeInTheDocument();
+    expect(getByText('Incomplete')).toBeInTheDocument();
+  });
 });

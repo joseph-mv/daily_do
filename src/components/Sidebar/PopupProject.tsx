@@ -12,10 +12,6 @@ const Popup: React.FC<PopupProps> = ({ showPopup, setShowPopup }) => {
   const [projectName, setProjectName] = useState<string>("");
   const dispatch = useDispatch();
 
-
-  // getProjectsFromIdb().then(data=>console.log(data))
-
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     setProjectName(e.target.value);
@@ -36,7 +32,6 @@ const Popup: React.FC<PopupProps> = ({ showPopup, setShowPopup }) => {
   return (
     showPopup && (
       <div
-        // onMouseLeave={() => setShowPopup(false)}
         className=" absolute top-0  z-40 pt-[60px]"
       >
         <div className="   bg-coral   p-6 rounded-xl shadow-lg w-80">

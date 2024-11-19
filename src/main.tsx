@@ -27,7 +27,7 @@ export const Root = () => {
   }, []);
 
   if (!reduxStore) {
-    return <div>Loading...</div>; // You can render a loader here
+    return <div className=" items-center  justify-center flex h-[100vh]"><span className="animate-bounce">Your days are going to be organised...</span></div>; // You can render a loader here
   }
 
   return (

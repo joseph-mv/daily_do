@@ -97,17 +97,20 @@ const Sidebar: React.FC = () => {
               <NavLink href="/completed">
                 <i className="fas fa-check mr-2"></i> Completed
               </NavLink>
+              <NavLink href="/in_completed">
+                <i className="fas fa-x mr-2"></i> Incomplete
+              </NavLink>
             </ul>
           </nav>
 
           {/* Search Bar */}
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <input
               type="text"
               placeholder="Search tasks..."
               className="w-full p-2 rounded bg-gray-200 text-gray-700 mb-4"
             />
-          </div>
+          </div> */}
 
           {/* Project Component */}
           <div className="relative ">

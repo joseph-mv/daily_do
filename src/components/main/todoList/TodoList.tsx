@@ -2,23 +2,22 @@ import { useSelector } from "react-redux";
 import { InitialState } from "../../../redux/reducers/type";
 import { dateToDay, dateToString } from "../utils";
 import Todo from "./Todo";
-import { useContext, useEffect} from "react";
+import { useContext, useEffect } from "react";
 import { addTodoToDb } from "../../../idb/todoService";
 import { DateContext } from "../../../contextAPI/context";
 import { comingDay, formerDay } from "../../../utils";
 
-
 const TodoList: React.FC = () => {
-  const  {date}=useContext(DateContext)
+  const { date } = useContext(DateContext);
   const dueDate = dateToString(date);
   const todoList = useSelector((store: InitialState) => store.todo[dueDate]);
-  console.log('todo list ',dueDate)
-useEffect(() => {
-  console.log('todo list useEffect')
-  if (todoList) {
-    addTodoToDb({ date: dueDate, ...todoList });
-  }
-}, [todoList,dueDate]);
+  console.log("todo list ", dueDate);
+  useEffect(() => {
+    console.log("todo list useEffect");
+    if (todoList) {
+      addTodoToDb({ date: dueDate, ...todoList });
+    }
+  }, [todoList, dueDate]);
 
   return (
     <div className=" relative bg-coral p-3 mx-3    rounded-xl h-[83%]">
@@ -33,7 +32,14 @@ useEffect(() => {
       <ul className="m-4 grid p-2 overflow-auto max-h-[90%]  grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]  gap-4 ">
         {todoList?.todoList?.map((todo, index) => {
           return (
-            <Todo key={index}  dueDate={dueDate} index={index} todo={todo} formerDay={formerDay(dueDate)} comingDay={comingDay(dueDate)} />
+            <Todo
+              key={index}
+              dueDate={dueDate}
+              index={index}
+              todo={todo}
+              formerDay={formerDay(dueDate)}
+              comingDay={comingDay(dueDate)}
+            />
           );
         })}
       </ul>

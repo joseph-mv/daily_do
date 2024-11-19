@@ -17,11 +17,11 @@
 
 *{
   /* outline: 1px solid skyblue; */
-  /* scrollbar-width: none;  */
+  scrollbar-width: none; 
   
 }
 body {
-  @apply bg-lightYellow text-black overflow-hidden max-w-[100vw] ; 
+  @apply bg-lightYellow text-black overflow-hidden max-w-[100vw] font-mono; 
  /* Default styles for light mode */
 }
 body.dark {
