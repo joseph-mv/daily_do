@@ -6,6 +6,7 @@ import Completed from './pages/CompletedPage';
 import { DateContext } from './contextAPI/context';
 import { useState } from 'react';
 import InCompletedPage from './pages/InCompletedPage';
+import PomodoroInfo from './pages/Pomodoro';
 
 export const App = () => {
   const [date, setDate] = useState<Date>(new Date());
@@ -19,6 +20,7 @@ export const App = () => {
           <Route path="/upcoming" element={<Upcoming />} />
           <Route path="/completed" element={<Completed />} />
           <Route path="/in_completed" element={<InCompletedPage />} />
+          <Route path="/pomodoro" element={<PomodoroInfo />} />
         </Routes>
       </div>
     </Router>

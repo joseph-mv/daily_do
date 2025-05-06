@@ -100,6 +100,9 @@ const Sidebar: React.FC = () => {
               <NavLink href="/in_completed">
                 <i className="fas fa-x mr-2"></i> Incomplete
               </NavLink>
+              <NavLink href="/pomodoro">
+                <i className="fas fa-clock mr-2"></i> pomodoro
+              </NavLink>
             </ul>
           </nav>
 

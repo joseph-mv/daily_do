@@ -1,7 +1,7 @@
 
 export type TaskItem = {
     task: string;
-    time: string;
+    time: string ;
     project: string;
     description: string;
     checked:boolean
