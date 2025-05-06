@@ -94,21 +94,55 @@ const PomodoroTimer: React.FC = () => {
   // Main timer effect
   useEffect(() => {
     if (!isRunning) return
-
+  
+    const endTime = Date.now() + secondsLeft * 1000
+  
     intervalRef.current = setInterval(() => {
-      setSecondsLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(intervalRef.current!)
-          handleSessionEnd()
-          return 0
-        }
-        return prev - 1
-      })
+      const now = Date.now()
+      const timeLeft = Math.max(0, Math.floor((endTime - now) / 1000))
+  
+      setSecondsLeft(timeLeft)
+  
+      if (timeLeft === 0) {
+        clearInterval(intervalRef.current!)
+        handleSessionEnd()
+      }
     }, 1000)
-
+  
     return () => clearInterval(intervalRef.current!)
   }, [isRunning])
 
+  // useEffect(() => {
+  //   // Try restoring state from localStorage
+  //   const saved = localStorage.getItem('pomodoro_timer')
+  
+  //   if (saved) {
+  //     const parsed = JSON.parse(saved)
+  
+  //     setMode(parsed.mode)
+  //     setPomodoroCount(parsed.pomodoroCount || 0)
+  //     setIsRunning(parsed.isRunning || false)
+  
+  //     // Calculate time left if endTime is valid
+  //     if (parsed.endTime) {
+  //       const timeLeft = Math.max(0, Math.floor((parsed.endTime - Date.now()) / 1000))
+  //       setSecondsLeft(timeLeft)
+  //     } else {
+  //       setSecondsLeft(DURATIONS[parsed.mode] || DURATIONS['work'])
+  //     }
+  //   }
+  // }, [])
+  
+  
+  // useEffect(() => {
+  //   localStorage.setItem('pomodoro_timer', JSON.stringify({
+  //     mode,
+  //     secondsLeft,
+  //     isRunning,
+  //     pomodoroCount
+  //   }))
+  // }, [mode, secondsLeft, isRunning, pomodoroCount])
+  
   return (
     <div className="w-full max-w-md mx-auto bg-white shadow-lg rounded-xl p-8 text-center border">
       <h2 className="text-2xl font-bold mb-4 capitalize text-gray-800">
