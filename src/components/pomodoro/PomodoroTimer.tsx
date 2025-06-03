@@ -4,9 +4,9 @@ import { FaPlay, FaPause, FaRedo } from 'react-icons/fa'
 type Mode = 'work' | 'shortBreak' | 'longBreak'
 
 const DURATIONS = {
-  work: 25 * 60,
-  shortBreak: 5 * 60,
-  longBreak: 15 * 60
+  work: 30,
+  shortBreak: 5,
+  longBreak: 15
 }
 
 const PomodoroTimer: React.FC = () => {
